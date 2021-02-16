@@ -1,25 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin Library</title>
-    <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
     <header>
-        <h1>Odin Library</h1>
+      <h1>Odin Library</h1>
     </header>
     <main>
-        <div class="controls">
-            <button id="add-book">
-                Add book
-            </button>
-        </div>
-        <div class="library">
-        </div>
+      <div class="controls">
+        <button id="add-book">Add book</button>
+      </div>
+      <div class="library"></div>
+      <div class="form-display">
+        <div class="form-popup">
+          <button class="close-form">X</button>
+          <form class="book-form">
+            <div>
+              <input
+                type="text"
+                placeholder="Book Title"
+                id="title"
+                aria-required="true"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Author"
+                id="author"
+                aria-required="true"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                placeholder="Number of pages"
+                id="pages"
+                aria-required="true"
+              />
+            </div>
+            <div>
+              <label for="read">Status:</label>
+            <select name="read" id="read">
+                <option value="true" selected>Read</option>
+                <option value="false">Not read</option>
+            </select>
+            </div>
+            <div>
+              <input type="submit" value="Add book" />
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </main>
     <script src="src/index.js"></script>
-</body>
+  </body>
 </html>

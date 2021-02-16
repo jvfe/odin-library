@@ -1,5 +1,7 @@
 const libraryView = document.querySelector(".library");
 const addBookButton = document.querySelector("#add-book");
+const bookForm = document.querySelector(".form-popup");
+const closeForm = document.querySelector(".close-form");
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -49,6 +51,14 @@ addBookToLibrary(c);
 myLibrary.forEach((book) => {
   libraryView.appendChild(book.createElement());
 });
+
+function formHandler() {
+  bookForm.classList.toggle("popup-active");
+}
+
+addBookButton.addEventListener("click", formHandler);
+
+closeForm.addEventListener("click", formHandler);
 
 const removeBookButtons = document.querySelectorAll(".remove-book");
 

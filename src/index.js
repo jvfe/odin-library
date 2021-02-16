@@ -1,9 +1,9 @@
 const libraryView = document.querySelector(".library");
 const addBookButton = document.querySelector("#add-book");
-const bookForm = document.querySelector(".form-popup");
+const formDiv = document.querySelector(".form-popup");
+const bookForm = document.querySelector(".book-form");
 const closeForm = document.querySelector(".close-form");
 let myLibrary = [];
-
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -39,34 +39,51 @@ Book.prototype.createElement = function () {
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
-}
-
-let hobbit = new Book("The Hobbit", "JRR Tolkien", "295", "read");
-let b = new Book("The Hobbit", "JRR Tolkien", "295", "read");
-let c = new Book("The Hobbit", "JRR Tolkien", "295", "read");
-addBookToLibrary(hobbit);
-addBookToLibrary(b);
-addBookToLibrary(c);
-
-myLibrary.forEach((book) => {
   libraryView.appendChild(book.createElement());
-});
-
-function formHandler() {
-  bookForm.classList.toggle("popup-active");
+  handleRemoveButtons();
 }
 
-addBookButton.addEventListener("click", formHandler);
+const hobbit = new Book("The Hobbit", "JRR Tolkien", "295", true);
+const lotr = new Book("The Fellowship of the Ring", "JRR Tolkien", "423", true);
 
-closeForm.addEventListener("click", formHandler);
+addBookToLibrary(hobbit);
+addBookToLibrary(lotr);
 
-const removeBookButtons = document.querySelectorAll(".remove-book");
+function handleRemoveButtons() {
+  const removeBookButtons = document.querySelectorAll(".remove-book");
 
-removeBookButtons.forEach((removeButton) => {
-  removeButton.addEventListener("click", () => {
-    let bookToRemove = removeButton.parentElement;
-    let bookIndex = bookToRemove.dataset.bookIndex;
-    myLibrary.splice(bookIndex, 1);
-    bookToRemove.remove();
+  removeBookButtons.forEach((removeButton) => {
+    removeButton.addEventListener("click", () => {
+      let bookToRemove = removeButton.parentElement;
+      let bookIndex = bookToRemove.dataset.bookIndex;
+      myLibrary.splice(bookIndex, 1);
+      bookToRemove.remove();
+    });
   });
+}
+
+function formPopupHandler() {
+  formDiv.classList.toggle("popup-active");
+}
+
+addBookButton.addEventListener("click", formPopupHandler);
+
+closeForm.addEventListener("click", formPopupHandler);
+
+bookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(bookForm);
+
+  const addedBook = new Book(
+    formData.get("title"),
+    formData.get("author"),
+    formData.get("pages"),
+    formData.get("read") == "true"
+  );
+
+  addBookToLibrary(addedBook);
+  formPopupHandler();
+
+  bookForm.reset();
 });

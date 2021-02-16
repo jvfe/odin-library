@@ -50,6 +50,6 @@ header {
 
 .book-form {
   display: grid;
-  grid-gap: 2ch;
+  grid-gap: 0.5ch;
   margin: 0.5em auto;
 }

@@ -20,37 +20,32 @@
         <div class="form-popup">
           <button class="close-form">X</button>
           <form class="book-form">
-            <div>
               <input
                 type="text"
                 placeholder="Book Title"
+                name="title"
                 id="title"
                 aria-required="true"
               />
-            </div>
-            <div>
               <input
                 type="text"
                 placeholder="Author"
+                name="author"
                 id="author"
                 aria-required="true"
               />
-            </div>
-            <div>
               <input
                 type="number"
                 placeholder="Number of pages"
+                name="pages"
                 id="pages"
                 aria-required="true"
               />
-            </div>
-            <div>
               <label for="read">Status:</label>
             <select name="read" id="read">
                 <option value="true" selected>Read</option>
                 <option value="false">Not read</option>
             </select>
-            </div>
             <div>
               <input type="submit" value="Add book" />
             </div>

@@ -16,18 +16,23 @@ Book.prototype.createElement = function () {
   bookElement.classList.add("book-card");
   bookElement.dataset.bookIndex = myLibrary.indexOf(this);
 
-  const title = document.createElement("h3");
+  const title = document.createElement("h2");
   title.textContent = this.title;
   const author = document.createElement("h5");
   author.textContent = `by ${this.author}`;
   const pages = document.createElement("p");
-  pages.textContent = `${this.pages}pg`;
+  pages.textContent = `${this.pages} pages`;
   const read = getReadButton(this.read);
+  this.read === false ? bookElement.classList.toggle("unread-book") : null;
+  const removeBookDiv = document.createElement("div");
+  removeBookDiv.classList.add("remove-book-div");
   const removeBook = document.createElement("button");
-  removeBook.textContent = "Remove";
+  removeBook.textContent = "✖";
+  removeBook.classList.add("btn");
   removeBook.classList.add("remove-book");
+  removeBookDiv.appendChild(removeBook);
 
-  const bookInfo = [title, author, pages, read, removeBook];
+  const bookInfo = [removeBookDiv, title, author, pages, read];
   bookInfo.forEach((info) => {
     info.classList.add("book-info");
     bookElement.appendChild(info);
@@ -54,10 +59,10 @@ function getReadButton(read) {
 
   if (read === true) {
     readButton.classList.toggle("read-button");
-    readButton.textContent = "read";
+    readButton.textContent = "read ✓";
   } else {
     readButton.classList.toggle("unread-button");
-    readButton.textContent = "Not read";
+    readButton.textContent = "Not read 𐄂";
   }
 
   return readButton;
@@ -68,10 +73,11 @@ function handleCardButtons() {
 
   removeBookButtons.forEach((removeButton) => {
     removeButton.addEventListener("click", () => {
-      let bookToRemove = removeButton.parentElement;
+      let bookToRemove = removeButton.parentElement.parentElement;
       let bookIndex = bookToRemove.dataset.bookIndex;
       myLibrary.splice(bookIndex, 1);
       bookToRemove.remove();
+      updateLibrary();
     });
   });
 
@@ -93,6 +99,7 @@ function handleCardButtons() {
 }
 
 function formPopupHandler() {
+  libraryView.parentElement.classList.toggle("darkened");
   formDiv.classList.toggle("popup-active");
 }
 

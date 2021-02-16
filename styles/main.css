@@ -3,3 +3,25 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+header {
+  margin: 2vh 1vw;
+}
+
+.library {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  margin: auto 1vw;
+  padding: 1ch;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.book-info {
+  margin: 0.5vh auto;
+}

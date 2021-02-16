@@ -22,8 +22,7 @@ Book.prototype.createElement = function () {
   author.textContent = `by ${this.author}`;
   const pages = document.createElement("p");
   pages.textContent = `${this.pages}pg`;
-  const read = document.createElement("p");
-  read.textContent = this.read;
+  const read = getReadButton(this.read);
   const removeBook = document.createElement("button");
   removeBook.textContent = "Remove";
   removeBook.classList.add("remove-book");
@@ -39,17 +38,32 @@ Book.prototype.createElement = function () {
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
-  libraryView.appendChild(book.createElement());
-  handleRemoveButtons();
 }
 
-const hobbit = new Book("The Hobbit", "JRR Tolkien", "295", true);
-const lotr = new Book("The Fellowship of the Ring", "JRR Tolkien", "423", true);
+function updateLibrary() {
+  libraryView.textContent = "";
+  myLibrary.forEach((book) => {
+    libraryView.appendChild(book.createElement());
+  });
+  handleCardButtons();
+}
 
-addBookToLibrary(hobbit);
-addBookToLibrary(lotr);
+function getReadButton(read) {
+  const readButton = document.createElement("button");
+  readButton.classList.add("status-button");
 
-function handleRemoveButtons() {
+  if (read === true) {
+    readButton.classList.toggle("read-button");
+    readButton.textContent = "read";
+  } else {
+    readButton.classList.toggle("unread-button");
+    readButton.textContent = "Not read";
+  }
+
+  return readButton;
+}
+
+function handleCardButtons() {
   const removeBookButtons = document.querySelectorAll(".remove-book");
 
   removeBookButtons.forEach((removeButton) => {
@@ -58,6 +72,22 @@ function handleRemoveButtons() {
       let bookIndex = bookToRemove.dataset.bookIndex;
       myLibrary.splice(bookIndex, 1);
       bookToRemove.remove();
+    });
+  });
+
+  const readButtons = document.querySelectorAll(".status-button");
+
+  readButtons.forEach((readButton) => {
+    readButton.addEventListener("click", () => {
+      let bookParent = readButton.parentElement;
+      let bookIndex = bookParent.dataset.bookIndex;
+      myLibrary[bookIndex] = new Book(
+        myLibrary[bookIndex].title,
+        myLibrary[bookIndex].author,
+        myLibrary[bookIndex].pages,
+        myLibrary[bookIndex].read === true ? false : true
+      );
+      updateLibrary();
     });
   });
 }
@@ -83,7 +113,15 @@ bookForm.addEventListener("submit", (event) => {
   );
 
   addBookToLibrary(addedBook);
+  updateLibrary();
   formPopupHandler();
 
   bookForm.reset();
 });
+
+const hobbit = new Book("The Hobbit", "JRR Tolkien", "295", true);
+const lotr = new Book("The Fellowship of the Ring", "JRR Tolkien", "423", true);
+
+addBookToLibrary(hobbit);
+addBookToLibrary(lotr);
+updateLibrary();

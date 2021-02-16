@@ -53,3 +53,11 @@ header {
   grid-gap: 0.5ch;
   margin: 0.5em auto;
 }
+
+.read-button {
+  background-color: aquamarine;
+}
+
+.unread-button {
+  background-color: lightcoral;
+}

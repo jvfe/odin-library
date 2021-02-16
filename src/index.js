@@ -16,9 +16,9 @@ Book.prototype.createElement = function () {
   bookElement.classList.add("book-card");
   bookElement.dataset.bookIndex = myLibrary.indexOf(this);
 
-  const title = document.createElement("h4");
+  const title = document.createElement("h3");
   title.textContent = this.title;
-  const author = document.createElement("h6");
+  const author = document.createElement("h5");
   author.textContent = `by ${this.author}`;
   const pages = document.createElement("p");
   pages.textContent = `${this.pages}pg`;

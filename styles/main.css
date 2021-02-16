@@ -1,30 +1,85 @@
+:root {
+  --fiery-rose: #f45b69;
+  --deep-champagne: #fbd1a2;
+  --pale-cerulean: #87c5ee;
+  --royal-blue: #0b1d51;
+  --rufous: #af6959;
+  --middle-blue-purple: #7d82b8;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  background: hidden;
+}
+
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  background: #fafafa;
+}
+
+.container {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+button {
+  font-family: "Inconsolata", monospace;
+  font-size: small;
+  color: var(--deep-champagne);
+  text-transform: uppercase;
+  background: none;
+  background-color: var(--royal-blue);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  letter-spacing: 0.1rem;
 }
 
 header {
+  margin: 0;
+  font-family: "Alegreya", serif;
+}
+
+.title {
   margin: 2vh 1vw;
+  color: var(--rufous);
+  text-align: center;
+  font-weight: bolder;
+}
+
+main {
+  margin: 0.5rem auto;
+}
+
+.controls {
+  display: grid;
+  place-items: center;
 }
 
 .library {
   display: flex;
   flex-wrap: wrap;
+  margin: 1rem;
 }
 
 .book-card {
   display: flex;
   flex-direction: column;
-  margin: auto 1vw;
+  margin: 1vh 1vw;
   padding: 1ch;
-  border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 25px;
+  background: var(--middle-blue-purple);
+  color: var(--royal-blue);
+  box-shadow: 0 1px 2px rgba(32, 33, 36, 0.28);
+  min-width: 30vw;
+  min-height: 2rem;
 }
 
 .book-info {
@@ -37,27 +92,58 @@ header {
 }
 
 .form-popup {
+  background-color: #74d3ae;
+  box-shadow: 0 1px 2px rgba(32, 33, 36, 0.28);
+  font-weight: bold;
+  width: 40vw;
+  height: auto;
   margin: 1ch 2ch;
   padding: 1ch;
-  border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 25px;
   transform: scale(0);
 }
 
+.close-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.close-form {
+  width: 2em;
+  height: 2em;
+  background-color: var(--fiery-rose);
+  grid-column: 2;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+}
+
 .popup-active {
-  transform: scale(1);
+  transform: translate(0, -50%) scale(1);
 }
 
 .book-form {
   display: grid;
-  grid-gap: 0.5ch;
   margin: 0.5em auto;
+  place-items: center;
+}
+
+.form-inputs {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1ch;
+  margin: 1em 0;
+}
+
+.status-button {
+  color: var(--royal-blue);
 }
 
 .read-button {
-  background-color: aquamarine;
+  background-color: var(--pale-cerulean);
 }
 
 .unread-button {
-  background-color: lightcoral;
+  background-color: var(--fiery-rose);
 }

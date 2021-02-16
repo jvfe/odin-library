@@ -5,11 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin Library</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya&family=Source+Sans+Pro&Inconsolata:wght@200;500&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
+    <div class="container">
     <header>
-      <h1>Odin Library</h1>
+      <h1 class="title">Odin Library</h1>
     </header>
     <main>
       <div class="controls">
@@ -18,8 +21,13 @@
       <div class="library"></div>
       <div class="form-display">
         <div class="form-popup">
+          <div class="close-div">
           <button class="close-form">X</button>
+        </div>
           <form class="book-form">
+          <div class="form-inputs">
+
+            <label for="title">Book Title:</label>
               <input
                 type="text"
                 placeholder="Book Title"
@@ -27,6 +35,7 @@
                 id="title"
                 aria-required="true"
               />
+            <label for="author">Author:</label>
               <input
                 type="text"
                 placeholder="Author"
@@ -34,6 +43,7 @@
                 id="author"
                 aria-required="true"
               />
+            <label for="author">Nº of pages:</label>
               <input
                 type="number"
                 placeholder="Number of pages"
@@ -46,14 +56,16 @@
                 <option value="true" selected>Read</option>
                 <option value="false">Not read</option>
             </select>
-            <div>
-              <input type="submit" value="Add book" />
-            </div>
+          </div>
+          <div>
+            <button type="submit">Add book</button>
+          </div>
             </div>
           </div>
         </form>
       </div>
     </main>
+  </div>
     <script src="src/index.js"></script>
   </body>
 </html>

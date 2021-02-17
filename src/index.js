@@ -4,41 +4,45 @@ const formDiv = document.querySelector(".form-popup");
 const bookForm = document.querySelector(".book-form");
 const closeForm = document.querySelector(".close-form");
 let myLibrary = [];
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+const Book = (title, author, pages, read) => {
+  const data = {
+    title,
+    author,
+    pages,
+    read,
+  };
 
-Book.prototype.createElement = function () {
-  const bookElement = document.createElement("div");
-  bookElement.classList.add("book-card");
-  bookElement.dataset.bookIndex = myLibrary.indexOf(this);
+  const createElement = function createElement() {
+    const bookElement = document.createElement("div");
+    bookElement.classList.add("book-card");
+    bookElement.dataset.bookIndex = myLibrary.indexOf(this);
 
-  const title = document.createElement("h2");
-  title.textContent = this.title;
-  const author = document.createElement("h5");
-  author.textContent = `by ${this.author}`;
-  const pages = document.createElement("p");
-  pages.textContent = `${this.pages} pages`;
-  const read = getReadButton(this.read);
-  this.read === false ? bookElement.classList.toggle("unread-book") : null;
-  const removeBookDiv = document.createElement("div");
-  removeBookDiv.classList.add("remove-book-div");
-  const removeBook = document.createElement("button");
-  removeBook.textContent = "✖";
-  removeBook.classList.add("btn");
-  removeBook.classList.add("remove-book");
-  removeBookDiv.appendChild(removeBook);
+    const title = document.createElement("h2");
+    title.textContent = this.title;
+    const author = document.createElement("h5");
+    author.textContent = `by ${this.author}`;
+    const pages = document.createElement("p");
+    pages.textContent = `${this.pages} pages`;
+    const read = getReadButton(this.read);
+    this.read === false ? bookElement.classList.toggle("unread-book") : null;
+    const removeBookDiv = document.createElement("div");
+    removeBookDiv.classList.add("remove-book-div");
+    const removeBook = document.createElement("button");
+    removeBook.textContent = "✖";
+    removeBook.classList.add("btn");
+    removeBook.classList.add("remove-book");
+    removeBookDiv.appendChild(removeBook);
 
-  const bookInfo = [removeBookDiv, title, author, pages, read];
-  bookInfo.forEach((info) => {
-    info.classList.add("book-info");
-    bookElement.appendChild(info);
-  });
+    const bookInfo = [removeBookDiv, title, author, pages, read];
+    bookInfo.forEach((info) => {
+      info.classList.add("book-info");
+      bookElement.appendChild(info);
+    });
 
-  return bookElement;
+    return bookElement;
+  };
+
+  return Object.assign({}, data, { createElement });
 };
 
 function addBookToLibrary(book) {
@@ -87,7 +91,7 @@ function handleCardButtons() {
     readButton.addEventListener("click", () => {
       let bookParent = readButton.parentElement;
       let bookIndex = bookParent.dataset.bookIndex;
-      myLibrary[bookIndex] = new Book(
+      myLibrary[bookIndex] = Book(
         myLibrary[bookIndex].title,
         myLibrary[bookIndex].author,
         myLibrary[bookIndex].pages,
@@ -112,7 +116,7 @@ bookForm.addEventListener("submit", (event) => {
 
   const formData = new FormData(bookForm);
 
-  const addedBook = new Book(
+  const addedBook = Book(
     formData.get("title"),
     formData.get("author"),
     formData.get("pages"),
@@ -126,8 +130,8 @@ bookForm.addEventListener("submit", (event) => {
   bookForm.reset();
 });
 
-const hobbit = new Book("The Hobbit", "JRR Tolkien", "295", true);
-const lotr = new Book("The Fellowship of the Ring", "JRR Tolkien", "423", true);
+const hobbit = Book("The Hobbit", "JRR Tolkien", "295", true);
+const lotr = Book("The Fellowship of the Ring", "JRR Tolkien", "423", true);
 
 addBookToLibrary(hobbit);
 addBookToLibrary(lotr);
